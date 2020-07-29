@@ -1,3 +1,7 @@
+# BabyDailyChart
+
+Log baby activities and show timeline on firebase hosting.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
