@@ -264,6 +264,7 @@ class Timeline extends React.Component<Props, LocalState> {
       <Table size="small">
         <TableHead>
           <TableRow>
+            <TableCell>名前</TableCell>
             <TableCell>ラベル</TableCell>
             <TableCell>開始時間</TableCell>
             <TableCell>終了時間</TableCell>
@@ -276,6 +277,7 @@ class Timeline extends React.Component<Props, LocalState> {
           this.state.timeline?.sort((i, j) => i.Start.getUTCDate()  - j.Start.getUTCDate()).map(t=> {
           return (
             <TableRow key={t.ID} >
+              <TableCell>{t.Baby}</TableCell>
               <TableCell>{t.Label}</TableCell>
               <TableCell><datepicker.DateTimePicker format="hh:mm a" value={t.Start} onChange={(date: Date | null) => this.updateHappen(t.ID, 'Start', date)}/></TableCell>
               <TableCell>{t.End === '-' ? '-' : <datepicker.DateTimePicker format="hh:mm a" value={t.End} onChange={(date: Date | null) => this.updateHappen(t.ID, 'End', date)}/>}</TableCell>
