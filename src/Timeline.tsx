@@ -276,8 +276,8 @@ class Timeline extends React.Component<Props, LocalState> {
           return (
             <TableRow key={t.ID} >
               <TableCell>{t.Label}</TableCell>
-              <TableCell><datepicker.TimePicker value={t.Start} onChange={(date: Date | null) => this.updateHappen(t.ID, 'Start', date)}/></TableCell>
-              <TableCell>{t.End === '-' ? '-' : <datepicker.TimePicker value={t.End} onChange={(date: Date | null) => this.updateHappen(t.ID, 'End', date)}/>}</TableCell>
+              <TableCell><datepicker.DateTimePicker format="hh:mm a" value={t.Start} onChange={(date: Date | null) => this.updateHappen(t.ID, 'Start', date)}/></TableCell>
+              <TableCell>{t.End === '-' ? '-' : <datepicker.DateTimePicker format="hh:mm a" value={t.End} onChange={(date: Date | null) => this.updateHappen(t.ID, 'End', date)}/>}</TableCell>
               <TableCell>{t.Memo}<IconButton onClick={(e) => this.openUpdateMemo(t.ID)}><Edit /></IconButton></TableCell>
               <TableCell><IconButton color="secondary" onClick={() => this.removeHappen(t.ID)} ><Delete/></IconButton></TableCell>
             </TableRow>
