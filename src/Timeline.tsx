@@ -243,6 +243,7 @@ class Timeline extends React.Component<Props, LocalState> {
       }
       </div>
       <hr/>
+      <div style={{height: "3em"}}></div>
       <datepicker.MuiPickersUtilsProvider utils={DateFnsUtils}>
       <datepicker.DatePicker
         autoOk
