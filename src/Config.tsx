@@ -247,7 +247,7 @@ class Config extends React.Component<Props, LocalState> {
                   <FormControl>
                     <InputLabel>赤ちゃん</InputLabel>
                     <NativeSelect
-                      value={this.state.physbtn["a" + v]}
+                      value={this.state.physbtn && Object.prototype.hasOwnProperty.call(this.state.physbtn, "a" + v) ? this.state.physbtn["a" + v] : null}
                       onChange={(e) => { this.updatePhysbtnBaby(v, e.target.value as string) }}
                     >
                       <option aria-label="未設定" />
@@ -261,7 +261,7 @@ class Config extends React.Component<Props, LocalState> {
                   <FormControl>
                     <InputLabel>ボタン</InputLabel>
                     <NativeSelect
-                      value={this.state.physbtn["b" + v]}
+                      value={this.state.physbtn && Object.prototype.hasOwnProperty.call(this.state.physbtn, "b" + v) ? this.state.physbtn["b" + v] : null}
                       onChange={(e) => { this.updatePhysbtn(v, e.target.value as string) }}
                     >
                       <option aria-label="未設定" />
