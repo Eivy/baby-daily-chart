@@ -2,7 +2,6 @@ package newhappen
 
 import (
 	"context"
-	"errors"
 	"log"
 	"net/http"
 	"time"
@@ -63,7 +62,7 @@ func NewHappen(w http.ResponseWriter, r *http.Request) {
 	err := createNewHappen(r.Context(), id, num)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		log.Println(err)
+		log.Fatal(err)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
@@ -97,11 +96,10 @@ func getPhysButton(ctx context.Context, userID, num string) (btn map[string]stri
 	doc := client.Collection("Users").Doc(userID).Collection("config").Doc("PhysBtn")
 	sn, err := doc.Get(ctx)
 	if err != nil {
-		log.Printf("Failed to get PhysBtn\n%v\n", err)
-		return
+		log.Fatalf("Failed to get PhysBtn\n%v\n", err)
 	}
 	if err = sn.DataTo(&btn); err != nil {
-		err = errors.New("No physical button settings")
+		log.Fatal("No physical button settings")
 		return
 	}
 	return
@@ -111,7 +109,7 @@ func getBaby(ctx context.Context, userID, babyID string) (baby Baby, err error) 
 	doc := client.Collection("Users").Doc(userID).Collection("baby").Doc(babyID)
 	sn, err := doc.Get(ctx)
 	if err != nil {
-		log.Printf("Failed to get baby: %s\n%v\n", babyID, err)
+		log.Fatalf("Failed to get baby: %s\n%v\n", babyID, err)
 		return
 	}
 	if err = sn.DataTo(&baby); err != nil {
@@ -124,7 +122,7 @@ func getButton(ctx context.Context, userID, btnID string) (btn Button, err error
 	doc := client.Collection("Users").Doc(userID).Collection("button").Doc(btnID)
 	sn, err := doc.Get(ctx)
 	if err != nil {
-		log.Printf("Failed to get button: %s\n%v\n", btnID, err)
+		log.Fatalf("Failed to get button: %s\n%v\n", btnID, err)
 		return
 	}
 	if err = sn.DataTo(&btn); err != nil {
@@ -154,7 +152,7 @@ func setNewHappenDuration(ctx context.Context, userID, baby string, btn Button) 
 	d := q.Documents(ctx)
 	s, err := d.GetAll()
 	if err != nil {
-		log.Printf("Failed to get continue happen: %v", err)
+		log.Fatalf("Failed to get continue happen: %v", err)
 		return
 	}
 	if len(s) == 0 {
@@ -170,13 +168,13 @@ func setNewHappenDuration(ctx context.Context, userID, baby string, btn Button) 
 			"-",
 		})
 		if err != nil {
-			log.Printf("Failed to set newhappen\n%v\n", err)
+			log.Fatalf("Failed to set newhappen\n%v\n", err)
 		}
 	} else {
 		for _, s := range s {
 			_, err = client.Collection("Users").Doc(userID).Collection("timeline").Doc(s.Ref.ID).Update(ctx, []firestore.Update{{Path: "End", Value: time.Now()}})
 			if err != nil {
-				log.Printf("Failed to update newhappen\n%v\n", err)
+				log.Fatalf("Failed to update newhappen\n%v\n", err)
 				return
 			}
 		}
