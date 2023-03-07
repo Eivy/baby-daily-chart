@@ -19,7 +19,7 @@
     "concurrently": "^5.2.0",
     "date-fns": "^2.14.0",
     "firebase": "^7.16.0",
-    "firebase-tools": "^9.8.0",
+    "firebase-tools": "^11.24.0",
     "firebaseui": "^4.5.2",
     "firebaseui-ja": "^1.0.0",
     "http-proxy-middleware": "^1.0.5",
